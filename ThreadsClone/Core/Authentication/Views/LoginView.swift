@@ -50,12 +50,7 @@ struct LoginView: View {
                     
                 } label: {
                     Text("Login")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.white)
-                        .frame(width: 352, height: 44)
-                        .background(.black)
-                        .cornerRadius(8)
+                        .modifier(ThreadsButtonViewModifier())
                     
                 }
                 
