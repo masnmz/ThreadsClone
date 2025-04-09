@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State private var viewModel = ProfileViewModel()
     @State private var selectedFilter: ProfileThreadFilter = .threads
     @Namespace var animation
     
@@ -18,20 +19,20 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
-    //            bio and stats
+                //            bio and stats
                 VStack(spacing: 20) {
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 12) {
                             //                fullname and username
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Charles Leclerc")
+                                Text(viewModel.currentUser?.fullname ?? "")
                                     .font(.title2)
                                     .fontWeight(.semibold)
-                                Text("charles_leclerc")
+                                Text(viewModel.currentUser?.username ?? "")
                                     .font(.subheadline)
                             }
                             
-                            Text("Formula 1 driver for Scuderia Ferrari")
+                            Text(viewModel.currentUser?.bio ?? "No bio yet")
                                 .font(.footnote)
                             
                             Text("2 followers")
@@ -55,7 +56,7 @@ struct ProfileView: View {
                             .cornerRadius(8)
                     }
                     
-    //                user content list view
+                    //                user content list view
                     
                     VStack {
                         HStack {
@@ -70,12 +71,12 @@ struct ProfileView: View {
                                             .foregroundStyle(.black)
                                             .frame(width: filterBarWidth, height: 1)
                                             .matchedGeometryEffect(id: "item", in: animation)
-                                            
+                                        
                                     } else {
                                         Rectangle()
                                             .foregroundStyle(.clear)
                                             .frame(width: filterBarWidth, height: 1)
-                                            
+                                        
                                         
                                     }
                                 }
@@ -93,7 +94,7 @@ struct ProfileView: View {
                         }
                     }
                     .padding(.vertical, 8)
-
+                    
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -107,6 +108,7 @@ struct ProfileView: View {
                 }
             }
             .padding(.horizontal)
+            
         }
     }
 }
