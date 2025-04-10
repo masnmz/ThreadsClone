@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class ProfileViewModel {
+class CurrentUserProfileViewModel {
     var currentUser: AppUser? {
         UserService.shared.currentUser
     }
