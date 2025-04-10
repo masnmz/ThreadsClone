@@ -19,6 +19,13 @@ class UserService {
         Task { try await fetchCurrentUser()}
     }
     
+    static func fetchUsers() async throws -> [AppUser] {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return [] }
+        let snapshot = try await Firestore.firestore().collection("users").getDocuments()
+        let users = snapshot.documents.compactMap({ try? $0.data(as: AppUser.self) })
+        return users.filter({$0.id != currentUid})
+    }
+    
     @MainActor
     func fetchCurrentUser() async throws {
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -26,7 +33,6 @@ class UserService {
         let user = try snapshot.data(as: AppUser.self)
         self.currentUser = user
         
-        print("DEBUG: User is \(user)")
         
     }
     
