@@ -5,12 +5,15 @@
 //  Created by Mehmet Alp Sönmez on 08/04/2025.
 //
 
+import PhotosUI
 import SwiftUI
+
 
 struct EditProfileView: View {
     @State private var bio = ""
     @State private var link = ""
     @State private var isPrivate: Bool = false
+    @Bindable var viewModel: CurrentUserProfileViewModel
 
     @Environment(\.dismiss) var dismiss
     var body: some View {
@@ -31,7 +34,17 @@ struct EditProfileView: View {
                         
                         Spacer()
                         
-                        CircularProfileImageView()
+                        PhotosPicker(selection: $viewModel.selectedItem) {
+                            if let image = viewModel.profileImage {
+                                 image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(Circle())
+                            } else {
+                                CircularProfileImageView()
+                            }
+                        }
                     }
                     
                     Divider()
@@ -76,7 +89,7 @@ struct EditProfileView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
-                        
+                        dismiss()
                     }
                     .font(.subheadline)
                     .foregroundStyle(.black)
@@ -96,5 +109,6 @@ struct EditProfileView: View {
 }
 
 #Preview {
-    EditProfileView()
+    let viewModel = CurrentUserProfileViewModel()
+    EditProfileView(viewModel: viewModel)
 }
