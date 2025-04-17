@@ -13,7 +13,7 @@ struct EditProfileView: View {
     @State private var bio = ""
     @State private var link = ""
     @State private var isPrivate: Bool = false
-    @Bindable var viewModel: CurrentUserProfileViewModel
+    @State var viewModel = EditProfileViewModel()
 
     @Environment(\.dismiss) var dismiss
     var body: some View {
@@ -109,6 +109,5 @@ struct EditProfileView: View {
 }
 
 #Preview {
-    let viewModel = CurrentUserProfileViewModel()
-    EditProfileView(viewModel: viewModel)
+    EditProfileView()
 }

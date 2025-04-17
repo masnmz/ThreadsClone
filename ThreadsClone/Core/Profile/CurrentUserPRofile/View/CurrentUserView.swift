@@ -45,7 +45,7 @@ struct CurrentUserProfileView: View {
                     UserContentListView()
                 }
                 .sheet(isPresented: $showEditProfile, content: {
-                    EditProfileView(viewModel: viewModel)
+                    EditProfileView()
 
                 })
                 .toolbar {

@@ -10,9 +10,12 @@ import SwiftUI
 struct ProfileHeaderView: View {
     let user: AppUser?
     
+    
     init(user: AppUser?) {
         self.user = user
     }
+    
+    
     
     var body: some View {
         HStack(alignment: .top) {
