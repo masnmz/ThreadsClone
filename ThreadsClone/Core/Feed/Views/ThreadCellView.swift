@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ThreadCell: View {
+    let thread: Thread
+    
     var body: some View {
         VStack {
             HStack(alignment: .top) {
@@ -15,7 +17,7 @@ struct ThreadCell: View {
                 
                 VStack(alignment: .leading, spacing: 4){
                     HStack {
-                        Text("maxverstappen1")
+                        Text(thread.user?.username ?? "")
                             .font(.footnote)
                             .fontWeight(.semibold)
                         
@@ -34,7 +36,7 @@ struct ThreadCell: View {
                         
                     }
                     
-                    Text("Formula 1 World Champion")
+                    Text(thread.caption)
                         .font(.subheadline)
                         .multilineTextAlignment(.leading)
                     
@@ -74,5 +76,5 @@ struct ThreadCell: View {
 }
 
 #Preview {
-    ThreadCell()
+    ThreadCell(thread: DeveloperPreview.shared.thread)
 }
